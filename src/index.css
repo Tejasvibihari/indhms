@@ -1,1 +1,28 @@
 @import "tailwindcss";
+
+@theme {
+    /* ---- Brand ---- */
+    --color-primary: #2563EB;
+    /* blue   – buttons, links, active states */
+    --color-primary-hover: #1D4ED8;
+    --color-secondary: #4F46E5;
+    /* indigo – gradient end, focus rings */
+    --color-secondary-hover: #4338CA;
+
+    /* ---- Surfaces ---- */
+    --color-bg: #F8FAFF;
+    /* page background */
+    --color-surface: #FFFFFF;
+    /* cards, panels */
+    --color-border: #E2E8F0;
+
+    /* ---- Text ---- */
+    --color-text: #0F172A;
+    /* headings */
+    --color-text-muted: #64748B;
+    /* body copy */
+
+    /* ---- Status (optional, not brand) ---- */
+    --color-success: #10B981;
+    --color-danger: #F43F5E;
+}
