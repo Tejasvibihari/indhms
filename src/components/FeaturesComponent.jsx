@@ -1,74 +1,83 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
-  FiSearch,
-  FiEdit3,
-  FiCheckCircle,
-  FiSend,
-  FiArrowUpRight,
-} from "react-icons/fi";
+  IconClipboardPulse,
+  IconCalendarCheck,
+  IconPillBottle,
+  IconFlask,
+  IconReceipt,
+  IconArrowUpRight,
+} from "./icons/MedicalIcons";
+import { Link } from "react-router-dom";
 
 /**
- * Feature Spotlight
- * A split-panel, auto-advancing tab switcher — deliberately different from
- * the card-grid layouts already used for Benefits / Features. The left rail
- * lists capabilities; the right panel renders a live code-built mockup per
- * feature (no image assets required) with a glowing progress rail that
- * echoes the site's existing "energy line" motif.
+ * Feature Spotlight — rebuilt around real hospital-management modules.
+ * A split-panel, auto-advancing tab switcher: the left rail lists modules,
+ * the right panel renders a live code-built mockup per module (no image
+ * assets required) with a glowing progress rail that echoes the site's
+ * "energy line" motif from the hero.
  */
 
 const FEATURES = [
   {
-    id: "research",
-    icon: FiSearch,
-    title: "Smart Research",
-    summary: "Gathers relevant sources from across the web in seconds.",
+    id: "records",
+    icon: IconClipboardPulse,
+    title: "Patient Records",
+    summary: "One unified chart across OPD, IPD, and every visit.",
     detail:
-      "Give it a topic and a few keywords — it scans the web, ranks sources by relevance, and hands you a clean, cited briefing instead of forty open tabs.",
+      "Registration, history, vitals, and prescriptions live on a single patient file — accessible instantly to every department that needs it, without duplicate paperwork.",
   },
   {
-    id: "draft",
-    icon: FiEdit3,
-    title: "Instant Drafting",
-    summary: "Turns a rough outline into a publish-ready first draft.",
+    id: "appointments",
+    icon: IconCalendarCheck,
+    title: "Appointments & OPD",
+    summary: "Book, reschedule, and track visits across every doctor.",
     detail:
-      "Feed it your outline and tone of voice. It writes a structured first draft you can edit, not a wall of text you have to rewrite from scratch.",
+      "Patients and staff can book slots online or at the desk. Doctors see a live queue, no-shows drop, and reminders go out automatically by SMS or WhatsApp.",
   },
   {
-    id: "verify",
-    icon: FiCheckCircle,
-    title: "Fact-Check & Cite",
-    summary: "Flags weak claims and attaches a source to every one.",
+    id: "pharmacy",
+    icon: IconPillBottle,
+    title: "Pharmacy & Inventory",
+    summary: "Stock, expiry, and dispensing tracked in real time.",
     detail:
-      "Every factual claim gets checked against trusted sources in real time, with a citation attached — so nothing ships that you can't stand behind.",
+      "Every prescription checks live stock before dispensing. Low-stock and near-expiry alerts keep the pharmacy counter running without manual audits.",
   },
   {
-    id: "publish",
-    icon: FiSend,
-    title: "One-Click Publish",
-    summary: "Schedules and pushes content to every channel at once.",
+    id: "lab",
+    icon: IconFlask,
+    title: "Lab & Diagnostics",
+    summary: "Orders, results, and reports without the paper trail.",
     detail:
-      "Pick the channels, set the time, and it formats and schedules the piece for each one — no more copy-pasting the same post five different ways.",
+      "Doctors order tests directly from the patient file, technicians log results against the same order, and reports sync back automatically — no re-typing.",
+  },
+  {
+    id: "billing",
+    icon: IconReceipt,
+    title: "Billing & Insurance",
+    summary: "One bill across consultations, pharmacy, and lab.",
+    detail:
+      "Charges from every department roll into a single itemized bill, with TPA and insurance claim workflows built in — so discharge doesn't wait on finance.",
   },
 ];
 
 const AUTO_ADVANCE_MS = 5200;
 
 /* ---------------------------------------------------------------- */
-/*  Right-panel mockups — one small, distinct visual per feature     */
+/*  Right-panel mockups — one small, distinct visual per module      */
 /* ---------------------------------------------------------------- */
 
-function ResearchMock() {
+function RecordsMock() {
   const rows = [
-    { w: "88%", tag: "nature.com" },
-    { w: "72%", tag: "arxiv.org" },
-    { w: "80%", tag: "reuters.com" },
+    { label: "Vitals recorded", w: "92%" },
+    { label: "Allergy check", w: "100%" },
+    { label: "Prescription synced", w: "78%" },
   ];
   return (
     <div className="w-full">
-      <div className="flex items-center gap-2 rounded-lg border border-border bg-bg px-3 py-2 mb-4">
-        <FiSearch className="text-text-muted shrink-0" size={14} />
-        <span className="text-xs text-text-muted">
-          renewable energy storage 2026
+      <div className="flex items-center justify-between rounded-lg border border-border bg-bg px-3 py-2 mb-4">
+        <span className="text-xs font-semibold text-text">Rohan Mehta · OPD #4821</span>
+        <span className="text-[10px] rounded-full bg-emerald-500/10 text-emerald-600 px-2 py-0.5 font-medium">
+          Active
         </span>
       </div>
       <div className="space-y-2.5">
@@ -81,8 +90,8 @@ function ResearchMock() {
                 style={{ width: r.w }}
               />
             </div>
-            <span className="text-[10px] text-text-muted shrink-0 w-16 text-right">
-              {r.tag}
+            <span className="text-[10px] text-text-muted shrink-0 w-28 text-right">
+              {r.label}
             </span>
           </div>
         ))}
@@ -91,28 +100,40 @@ function ResearchMock() {
   );
 }
 
-function DraftMock() {
-  const lines = ["w-full", "w-11/12", "w-4/5", "w-full", "w-2/3"];
+function AppointmentsMock() {
+  const slots = [
+    { time: "9:30 AM", name: "A. Kapoor", status: "Checked in" },
+    { time: "10:00 AM", name: "S. Iyer", status: "Waiting" },
+    { time: "10:30 AM", name: "P. Nair", status: "Upcoming" },
+  ];
   return (
     <div className="w-full">
       <div className="flex items-center justify-between mb-3">
         <span className="text-[11px] font-semibold text-text-muted uppercase tracking-wide">
-          Draft.md
+          Dr. Sharma · Today
         </span>
         <span className="text-[10px] rounded-full bg-primary/10 text-primary px-2 py-0.5 font-medium">
-          482 words
+          12 booked
         </span>
       </div>
       <div className="space-y-2">
-        {lines.map((w, i) => (
+        {slots.map((s, i) => (
           <div
             key={i}
-            className={`h-2 rounded-full bg-border/70 ${w} ${i === lines.length - 1 ? "relative" : ""
-              }`}
+            className="flex items-center gap-3 rounded-lg border border-border bg-bg px-3 py-2.5"
           >
-            {i === lines.length - 1 && (
-              <span className="absolute -right-1 top-1/2 -translate-y-1/2 w-0.5 h-3.5 bg-primary cursor-blink" />
-            )}
+            <span className="text-[11px] font-semibold text-text w-16 shrink-0">{s.time}</span>
+            <span className="text-xs text-text flex-1 truncate">{s.name}</span>
+            <span
+              className={`text-[10px] font-medium px-2 py-0.5 rounded-full shrink-0 ${s.status === "Checked in"
+                ? "bg-emerald-500/10 text-emerald-600"
+                : s.status === "Waiting"
+                  ? "bg-amber-500/10 text-amber-600"
+                  : "bg-border text-text-muted"
+                }`}
+            >
+              {s.status}
+            </span>
           </div>
         ))}
       </div>
@@ -120,11 +141,44 @@ function DraftMock() {
   );
 }
 
-function VerifyMock() {
+function PharmacyMock() {
+  const items = [
+    { name: "Paracetamol 500mg", stock: 82, low: false },
+    { name: "Amoxicillin 250mg", stock: 14, low: true },
+    { name: "Insulin (Rapid)", stock: 6, low: true },
+  ];
+  return (
+    <div className="w-full space-y-2.5">
+      {items.map((it, i) => (
+        <div
+          key={i}
+          className="flex items-center gap-3 rounded-lg border border-border bg-bg px-3 py-2.5"
+        >
+          <div className="min-w-0 flex-1">
+            <p className="text-xs font-medium text-text truncate">{it.name}</p>
+            <div className="h-1.5 rounded-full bg-border/70 overflow-hidden mt-1.5">
+              <div
+                className={`h-full rounded-full ${it.low ? "bg-amber-500" : "bg-linear-to-r from-primary to-secondary"}`}
+                style={{ width: `${Math.min(it.stock, 100)}%` }}
+              />
+            </div>
+          </div>
+          <span
+            className={`text-[10px] font-semibold shrink-0 ${it.low ? "text-amber-600" : "text-text-muted"}`}
+          >
+            {it.stock} units
+          </span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function LabMock() {
   const claims = [
-    { text: "Battery costs fell 14% YoY", ok: true },
-    { text: "Grid demand up in 3 regions", ok: true },
-    { text: "Adoption doubled since 2023", ok: false },
+    { text: "CBC — results ready", ok: true },
+    { text: "Lipid Profile — in progress", ok: null },
+    { text: "X-Ray Chest — awaiting sample", ok: false },
   ];
   return (
     <div className="w-full space-y-2.5">
@@ -133,9 +187,8 @@ function VerifyMock() {
           key={i}
           className="flex items-start gap-2.5 rounded-lg border border-border bg-bg px-3 py-2.5"
         >
-          <FiCheckCircle
-            size={14}
-            className={`mt-0.5 shrink-0 ${c.ok ? "text-emerald-500" : "text-amber-500"
+          <span
+            className={`mt-1 w-2 h-2 rounded-full shrink-0 ${c.ok === true ? "bg-emerald-500" : c.ok === false ? "bg-border" : "bg-amber-500"
               }`}
           />
           <span className="text-xs text-text leading-snug">{c.text}</span>
@@ -145,35 +198,32 @@ function VerifyMock() {
   );
 }
 
-function PublishMock() {
-  const channels = ["Blog", "LinkedIn", "X", "Newsletter"];
+function BillingMock() {
+  const lines = ["Consultation — ₹500", "Pharmacy — ₹1,240", "Lab tests — ₹2,100"];
   return (
     <div className="w-full">
-      <div className="flex flex-wrap gap-2 mb-4">
-        {channels.map((c) => (
-          <span
-            key={c}
-            className="text-[11px] font-medium rounded-full border border-primary/30 bg-primary/5 text-primary px-3 py-1"
-          >
-            {c}
-          </span>
+      <div className="space-y-2 mb-4">
+        {lines.map((l, i) => (
+          <div key={i} className="flex items-center justify-between text-xs">
+            <span className="text-text-muted">{l.split(" — ")[0]}</span>
+            <span className="text-text font-medium">{l.split(" — ")[1]}</span>
+          </div>
         ))}
       </div>
-      <div className="flex items-center gap-2.5 rounded-lg bg-linear-to-r from-primary to-secondary px-3 py-2.5">
-        <FiSend size={14} className="text-white shrink-0" />
-        <span className="text-xs font-medium text-white">
-          Scheduled for 9:00 AM · all channels
-        </span>
+      <div className="flex items-center justify-between rounded-lg bg-linear-to-r from-primary to-secondary px-3 py-2.5">
+        <span className="text-xs font-medium text-white">Total due</span>
+        <span className="text-sm font-bold text-white">₹3,840</span>
       </div>
     </div>
   );
 }
 
 const MOCKS = {
-  research: ResearchMock,
-  draft: DraftMock,
-  verify: VerifyMock,
-  publish: PublishMock,
+  records: RecordsMock,
+  appointments: AppointmentsMock,
+  pharmacy: PharmacyMock,
+  lab: LabMock,
+  billing: BillingMock,
 };
 
 /* ---------------------------------------------------------------- */
@@ -222,7 +272,7 @@ export default function FeatureSpotlight() {
             <div className="w-2.5 h-2.5 rounded-full bg-primary shadow-[0_0_12px_var(--color-primary),0_0_20px_var(--color-primary)]" />
           </div>
           <h2 className="text-primary text-xl sm:text-2xl font-semibold tracking-wide uppercase">
-            Capabilities
+            Features
           </h2>
           <div className="hidden xs:flex items-center">
             <div className="w-2.5 h-2.5 rounded-full bg-primary shadow-[0_0_12px_var(--color-primary),0_0_20px_var(--color-primary)]" />
@@ -233,11 +283,11 @@ export default function FeatureSpotlight() {
         {/* Heading */}
         <div className="text-center max-w-xl mx-auto mb-12 sm:mb-16">
           <h2 className="text-text font-bold text-3xl sm:text-4xl mb-4">
-            One assistant, every step
+            Every Department, One System
           </h2>
           <p className="text-text-muted text-sm sm:text-base leading-relaxed">
-            From the first search to the final publish, each capability hands
-            off cleanly to the next.
+            From the front desk to the billing counter, each module hands off
+            cleanly to the next — no re-entry, no lost paperwork.
           </p>
         </div>
 
@@ -278,7 +328,7 @@ export default function FeatureSpotlight() {
                         : "bg-bg border-border text-text-muted group-hover:text-primary"
                         }`}
                     >
-                      <Icon size={16} />
+                      <Icon size={17} />
                     </span>
                     <div className="min-w-0">
                       <h3
@@ -328,21 +378,17 @@ export default function FeatureSpotlight() {
 
         {/* CTA */}
         <div className="flex justify-center mt-12 sm:mt-16">
-          <button className="group inline-flex items-center gap-2 rounded-xl px-6 py-3.5 text-[15px] font-semibold text-white bg-linear-to-r from-primary to-secondary shadow-[0_8px_24px_-8px_var(--color-primary)] hover:-translate-y-0.5 transition-transform duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary">
-            See it in action
-            <FiArrowUpRight className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </button>
+          <Link
+            to="/features"
+            className="group inline-flex items-center gap-2 rounded-xl px-6 py-3.5 text-[15px] font-semibold text-white bg-linear-to-r from-primary to-secondary shadow-[0_8px_24px_-8px_var(--color-primary)] hover:-translate-y-0.5 transition-transform duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary"
+          >
+            See all features
+            <IconArrowUpRight className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </Link>
         </div>
       </div>
 
       <style>{`
-        .cursor-blink {
-          animation: cursorBlink 1s steps(1) infinite;
-        }
-        @keyframes cursorBlink {
-          0%, 49% { opacity: 1; }
-          50%, 100% { opacity: 0; }
-        }
         .tab-progress {
           height: 0%;
           animation-name: tabFill;
@@ -352,9 +398,6 @@ export default function FeatureSpotlight() {
         @keyframes tabFill {
           from { height: 0%; }
           to   { height: 100%; }
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .cursor-blink { animation: none !important; opacity: 1; }
         }
       `}</style>
     </section>

@@ -11,14 +11,14 @@ import React, { useEffect, useState } from "react";
  */
 
 const COMPANIES = [
-    "Nova Health",
-    "Bluewave",
-    "Solstice Labs",
-    "Meridian Care",
-    "Orbit Diagnostics",
-    "Cedarline",
-    "Northbridge",
-    "Vertex Clinics",
+    "Nova Health Hospital",
+    "Bluewave Multi-Speciality",
+    "Solstice Diagnostics",
+    "Meridian Care Hospital",
+    "Orbit Diagnostics Lab",
+    "Cedarline Clinics",
+    "Northbridge Medical Centre",
+    "Vertex Speciality Hospital",
 ];
 
 function LogoBadge({ name }) {
@@ -50,7 +50,7 @@ export default function TrustedBy() {
         <section className="w-full bg-bg py-12 sm:py-16 px-4">
             <div className="max-w-6xl mx-auto">
                 <p className="text-center text-xs sm:text-sm font-medium text-text-muted uppercase tracking-wide mb-8">
-                    Trusted by teams at
+                    Trusted by hospitals & clinics across India
                 </p>
 
                 <div

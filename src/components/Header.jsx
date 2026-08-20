@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { FiZap, FiMenu, FiX } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import { IconHospitalCross, IconMenu, IconClose, IconPhoneCall } from "./icons/MedicalIcons";
 
 /**
  * Site navbar — sticky, light theme, built on the shared design tokens.
- * Logo + nav links on the left/center, a fully-rounded (pill) CTA button
- * on the right. Collapses into a slide-down menu on mobile.
+ * Logo + nav links on the left/center, a fully-rounded (pill) "Talk to
+ * Sales" CTA on the right. Collapses into a slide-down menu on mobile.
  */
 
 const NAV_LINKS = [
@@ -13,7 +13,7 @@ const NAV_LINKS = [
     { label: "Benefits", to: "/benefits" },
     { label: "Pricing", to: "/pricing" },
     { label: "Resources", to: "/resources" },
-    { label: "Contact", to: "/contact" },
+    { label: "FAQs", to: "/faqs" },
 ];
 
 export default function Navbar() {
@@ -47,10 +47,10 @@ export default function Navbar() {
                 {/* Logo */}
                 <Link to="/" className="flex items-center gap-2.5 shrink-0">
                     <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-linear-to-br from-primary to-secondary text-white shadow-[0_6px_16px_-6px_var(--color-primary)]">
-                        <FiZap size={16} />
+                        <IconHospitalCross size={18} />
                     </span>
                     <span className="text-text font-bold text-lg tracking-tight">
-                        Aurora
+                        Ind<span className="hero-gradient-text">HMS</span>
                     </span>
                 </Link>
 
@@ -74,7 +74,8 @@ export default function Navbar() {
                         to="/contact"
                         className="hidden sm:inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-white bg-linear-to-r from-primary to-secondary shadow-[0_8px_20px_-8px_var(--color-primary)] hover:-translate-y-0.5 transition-transform duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary"
                     >
-                        Get Started
+                        <IconPhoneCall size={15} />
+                        Talk to Sales
                     </Link>
 
                     <button
@@ -84,7 +85,7 @@ export default function Navbar() {
                         aria-expanded={mobileOpen}
                         className="lg:hidden flex items-center justify-center w-10 h-10 rounded-lg border border-border text-text hover:border-primary/40 hover:text-primary transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary"
                     >
-                        {mobileOpen ? <FiX size={18} /> : <FiMenu size={18} />}
+                        {mobileOpen ? <IconClose size={18} /> : <IconMenu size={18} />}
                     </button>
                 </div>
             </nav>
@@ -112,11 +113,21 @@ export default function Navbar() {
                             onClick={() => setMobileOpen(false)}
                             className="w-full inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-white bg-linear-to-r from-primary to-secondary shadow-[0_8px_20px_-8px_var(--color-primary)] transition-transform duration-200 active:scale-[0.98]"
                         >
-                            Get Started
+                            <IconPhoneCall size={15} />
+                            Talk to Sales
                         </Link>
                     </li>
                 </ul>
             </div>
+
+            <style>{`
+        .hero-gradient-text {
+          background: linear-gradient(90deg, #2563EB 0%, #4F46E5 100%);
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+        }
+      `}</style>
         </header>
     );
 }

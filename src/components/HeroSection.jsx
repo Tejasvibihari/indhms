@@ -1,4 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { IconPhoneCall } from "./icons/MedicalIcons";
 
 /**
  * Premium light-theme AI / SaaS hero section.
@@ -151,7 +153,7 @@ function DashboardPreview() {
             <div
                 className="dash-glass"
                 role="img"
-                aria-label="Preview of the Aurora AI operations dashboard showing revenue, active users, satisfaction rate, and referral tracking"
+                aria-label="Preview of the IndHMS hospital operations dashboard showing OPD patients, bed occupancy, pending bills, and patient satisfaction"
             >
                 <div className="dash-reflection" aria-hidden="true" />
 
@@ -161,7 +163,7 @@ function DashboardPreview() {
                     <span className="w-2.5 h-2.5 rounded-full bg-slate-300" />
                     <span className="w-2.5 h-2.5 rounded-full bg-slate-300" />
                     <span className="ml-3 text-[11px] font-medium tracking-wide text-slate-400">
-                        app.aurora.ai/dashboard
+                        app.indhms.com/dashboard
                     </span>
                 </div>
 
@@ -169,10 +171,10 @@ function DashboardPreview() {
                     {/* top stat row */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
                         {[
-                            { label: "Monthly Revenue", value: "$84,210", delta: "+18%", up: true },
-                            { label: "Active Users", value: "12,480", delta: "+6%", up: true },
-                            { label: "Workflows Automated", value: "3,096", delta: "-4%", up: false },
-                            { label: "Client Satisfaction", value: "97%", delta: "+3%", up: true },
+                            { label: "OPD Patients Today", value: "1,248", delta: "+12%", up: true },
+                            { label: "Beds Occupied", value: "312 / 400", delta: "+4%", up: true },
+                            { label: "Pending Bills", value: "37", delta: "-9%", up: false },
+                            { label: "Patient Satisfaction", value: "97%", delta: "+3%", up: true },
                         ].map((c) => (
                             <div
                                 key={c.label}
@@ -196,7 +198,7 @@ function DashboardPreview() {
                     <div className="grid grid-cols-1 md:grid-cols-[1.3fr_1fr] gap-3">
                         <div className="rounded-2xl border border-slate-200/80 bg-gradient-to-br from-blue-50 via-white to-violet-50 p-4 relative overflow-hidden min-h-[160px]">
                             <p className="text-[11px] font-semibold text-slate-500 mb-3">
-                                Automation Throughput
+                                Appointments Handled
                             </p>
                             <svg viewBox="0 0 300 90" className="w-full h-20" preserveAspectRatio="none">
                                 <polyline
@@ -219,12 +221,12 @@ function DashboardPreview() {
                                     </linearGradient>
                                 </defs>
                             </svg>
-                            <p className="text-[11px] text-slate-400 mt-1">Last 30 days · tasks/hour</p>
+                            <p className="text-[11px] text-slate-400 mt-1">Last 30 days · appointments/day</p>
                         </div>
 
                         <div className="rounded-2xl border border-slate-200/80 bg-white p-4 flex flex-col items-center justify-center">
                             <p className="text-[11px] font-semibold text-slate-500 mb-2 self-start">
-                                Model Confidence
+                                Bed Occupancy
                             </p>
                             <div className="relative w-24 h-24">
                                 <svg viewBox="0 0 100 100" className="w-24 h-24 -rotate-90">
@@ -261,23 +263,23 @@ function HeroCTA() {
     return (
         <div className="w-full flex flex-col items-center gap-6">
             <div className="flex flex-col sm:flex-row items-center gap-3">
-                <button
-                    type="button"
+                <Link
+                    to="/contact"
                     className="cta-primary group inline-flex items-center gap-2 rounded-xl px-6 py-3.5 text-[15px] font-semibold text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
                 >
                     Book A Free Demo
                     <span aria-hidden="true" className="cta-arrow transition-transform duration-300 group-hover:translate-x-1">
                         →
                     </span>
-                </button>
+                </Link>
 
-                {/* <button
-                    type="button"
+                <Link
+                    to="/contact"
                     className="cta-secondary inline-flex items-center gap-2 rounded-xl px-6 py-3.5 text-[15px] font-semibold text-slate-700 bg-white border border-slate-200 hover:bg-slate-50 hover:border-slate-300 transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
                 >
-                    Explore Solutions
-                </button> */}
-
+                    <IconPhoneCall size={16} />
+                    Talk to Sales
+                </Link>
             </div>
         </div>
     );
@@ -331,9 +333,9 @@ export default function HeroSection() {
                     className="font-extrabold tracking-tight text-slate-900 leading-[1.1]"
                     style={{ fontSize: "clamp(1.9rem, 3.6vw, 3.25rem)" }}
                 >
-                    Manage Your Hospital Smarter, Faster & Better
+                    Manage Your Hospital
                     <br />
-                    {/* <span className="hero-gradient-text">with AI-Powered Solutions</span> */}
+                    <span className="hero-gradient-text">Smarter, Faster & Better</span>
                 </h1>
 
                 {/* supporting copy */}

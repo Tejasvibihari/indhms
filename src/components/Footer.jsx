@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import {
-    FiTwitter,
-    FiLinkedin,
-    FiGithub,
-    FiInstagram,
-    FiZap,
-} from "react-icons/fi";
+    IconHospitalCross,
+    IconSocialX,
+    IconSocialLinked,
+    IconSocialGlobe,
+    IconSocialInsta,
+} from "./icons/MedicalIcons";
 
 /**
  * Site footer — light theme, built entirely on the shared design tokens
@@ -21,7 +21,7 @@ const LINK_COLUMNS = [
     },
     {
         title: "Company",
-        links: [["About", "/about"], ["Careers", "/careers"], ["Blog", "/blog"], ["Contact", "/contact"]],
+        links: [["About", "/about"], ["Careers", "/careers"], ["Blog", "/blog"], ["Contact Sales", "/contact"]],
     },
     {
         title: "Resources",
@@ -30,10 +30,10 @@ const LINK_COLUMNS = [
 ];
 
 const SOCIALS = [
-    { icon: FiTwitter, label: "Twitter" },
-    { icon: FiLinkedin, label: "LinkedIn" },
-    { icon: FiGithub, label: "GitHub" },
-    { icon: FiInstagram, label: "Instagram" },
+    { icon: IconSocialX, label: "Twitter / X" },
+    { icon: IconSocialLinked, label: "LinkedIn" },
+    { icon: IconSocialGlobe, label: "Website" },
+    { icon: IconSocialInsta, label: "Instagram" },
 ];
 
 const LEGAL_LINKS = [["Privacy Policy", "/privacy-policy"], ["Terms of Service", "/terms-of-service"], ["Cookie Policy", "/cookie-policy"]];
@@ -73,15 +73,16 @@ export default function Footer() {
                     <div className="sm:col-span-2 lg:col-span-1">
                         <div className="flex items-center gap-2.5 mb-4">
                             <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-linear-to-br from-primary to-secondary text-white shadow-[0_6px_16px_-6px_var(--color-primary)]">
-                                <FiZap size={16} />
+                                <IconHospitalCross size={16} />
                             </span>
                             <span className="text-text font-bold text-lg tracking-tight">
-                                Aurora
+                                IndHMS
                             </span>
                         </div>
                         <p className="text-sm text-text-muted leading-relaxed max-w-xs mb-6">
-                            We build intelligent digital products and automate complex
-                            workflows so businesses can scale with AI-powered technology.
+                            One platform for patients, doctors, appointments, billing,
+                            pharmacy, and lab operations — built for hospitals and clinics
+                            across India.
                         </p>
                         <div className="flex items-center gap-2.5">
                             {SOCIALS.map(({ icon: Icon, label }) => (
@@ -106,7 +107,7 @@ export default function Footer() {
                 {/* Bottom bar */}
                 <div className="mt-12 sm:mt-14 pt-6 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
                     <p className="text-xs text-text-muted text-center sm:text-left">
-                        © {new Date().getFullYear()} Aurora. All rights reserved.
+                        © {new Date().getFullYear()} IndHMS. All rights reserved.
                     </p>
                     <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
                         {LEGAL_LINKS.map(([label, to]) => (

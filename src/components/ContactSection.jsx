@@ -1,19 +1,21 @@
 import React, { useState } from "react";
 import {
-    FiPhone,
-    FiMail,
-    FiSend,
-    FiUser,
-    FiMessageSquare,
-    FiSmartphone,
-} from "react-icons/fi";
-import { FaWhatsapp } from "react-icons/fa";
+    IconPhoneCall,
+    IconMail,
+    IconSend,
+    IconUser,
+    IconMessage,
+    IconSmartphone,
+    IconBuilding,
+    IconChat,
+} from "./icons/MedicalIcons";
 
 /**
- * Contact Us — light theme.
+ * Contact Sales — light theme.
  * Left: reachable contact channels (call, email, WhatsApp) as tap/click
- * targets. Right: a contact form. Built on the shared design tokens so it
- * stays in sync with the rest of the site.
+ * targets. Right: a sales-qualification form (name, hospital, email,
+ * phone, message). Built on the shared design tokens so it stays in sync
+ * with the rest of the site.
  *
  * Swap the placeholder phone number, email, and WhatsApp link for the real
  * ones before shipping.
@@ -21,19 +23,19 @@ import { FaWhatsapp } from "react-icons/fa";
 
 const CONTACT_METHODS = [
     {
-        icon: FiPhone,
-        label: "Call us",
+        icon: IconPhoneCall,
+        label: "Call our sales team",
         value: "+91 98765 43210",
         href: "tel:+919876543210",
     },
     {
-        icon: FiMail,
-        label: "Email us",
-        value: "hello@aurora.ai",
-        href: "mailto:hello@aurora.ai",
+        icon: IconMail,
+        label: "Email sales",
+        value: "sales@indhms.com",
+        href: "mailto:sales@indhms.com",
     },
     {
-        icon: FaWhatsapp,
+        icon: IconChat,
         label: "WhatsApp",
         value: "Chat with us",
         href: "https://wa.me/919876543210",
@@ -44,6 +46,7 @@ export default function ContactSection() {
     const [form, setForm] = useState({
         firstName: "",
         lastName: "",
+        hospital: "",
         email: "",
         mobile: "",
         message: "",
@@ -59,13 +62,13 @@ export default function ContactSection() {
         e.preventDefault();
         if (!form.firstName || !form.lastName || !form.email || !form.mobile || !form.message)
             return;
-        // Wire this up to your backend / form service.
+        // Wire this up to your backend / CRM / form service.
         setSubmitted(true);
-        setForm({ firstName: "", lastName: "", email: "", mobile: "", message: "" });
+        setForm({ firstName: "", lastName: "", hospital: "", email: "", mobile: "", message: "" });
     }
 
     return (
-        <section className="w-full bg-bg py-16 sm:py-24 px-4">
+        <section id="contact-sales" className="w-full bg-bg py-16 sm:py-24 px-4">
             <div className="max-w-6xl mx-auto">
 
                 {/* Eyebrow */}
@@ -75,7 +78,7 @@ export default function ContactSection() {
                         <div className="w-2.5 h-2.5 rounded-full bg-primary shadow-[0_0_12px_var(--color-primary),0_0_20px_var(--color-primary)]" />
                     </div>
                     <h2 className="text-primary text-xl sm:text-2xl font-semibold tracking-wide uppercase">
-                        Contact
+                        Contact Sales
                     </h2>
                     <div className="hidden xs:flex items-center">
                         <div className="w-2.5 h-2.5 rounded-full bg-primary shadow-[0_0_12px_var(--color-primary),0_0_20px_var(--color-primary)]" />
@@ -86,11 +89,11 @@ export default function ContactSection() {
                 {/* Heading */}
                 <div className="text-center max-w-xl mx-auto mb-12 sm:mb-16">
                     <h2 className="text-text font-bold text-3xl sm:text-4xl mb-4">
-                        Let's Talk
+                        Let's Set Up Your Hospital
                     </h2>
                     <p className="text-text-muted text-sm sm:text-base leading-relaxed">
-                        Have a project in mind or just a question? Reach out however's
-                        easiest — we usually reply within a few hours.
+                        Tell us about your hospital or clinic and our sales team will
+                        reach out with a tailored demo — usually within a few hours.
                     </p>
                 </div>
 
@@ -123,16 +126,16 @@ export default function ContactSection() {
                         {/* Supporting note card */}
                         <div className="rounded-2xl bg-linear-to-br from-primary to-secondary p-6 mt-2 flex-1 flex flex-col justify-center min-h-[140px]">
                             <p className="text-white font-semibold text-base mb-1.5">
-                                Prefer a quick chat?
+                                Prefer a live walkthrough?
                             </p>
                             <p className="text-white/85 text-sm leading-relaxed">
-                                WhatsApp is the fastest way to reach us — most messages get a
-                                reply within the hour, during business hours.
+                                Book a free demo and we'll show IndHMS running with data
+                                modeled on your hospital's actual workflow.
                             </p>
                         </div>
                     </div>
 
-                    {/* Right: contact form */}
+                    {/* Right: sales form */}
                     <form
                         onSubmit={handleSubmit}
                         className="rounded-2xl border border-border bg-surface p-6 sm:p-8 shadow-sm"
@@ -146,7 +149,7 @@ export default function ContactSection() {
                                     First name
                                 </label>
                                 <div className="flex items-center gap-2.5 rounded-xl border border-border bg-bg px-3.5 py-2.5 focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20 transition-all duration-200">
-                                    <FiUser size={15} className="text-text-muted shrink-0" />
+                                    <IconUser size={16} className="text-text-muted shrink-0" />
                                     <input
                                         id="contact-first-name"
                                         name="firstName"
@@ -168,7 +171,7 @@ export default function ContactSection() {
                                     Last name
                                 </label>
                                 <div className="flex items-center gap-2.5 rounded-xl border border-border bg-bg px-3.5 py-2.5 focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20 transition-all duration-200">
-                                    <FiUser size={15} className="text-text-muted shrink-0" />
+                                    <IconUser size={16} className="text-text-muted shrink-0" />
                                     <input
                                         id="contact-last-name"
                                         name="lastName"
@@ -182,6 +185,27 @@ export default function ContactSection() {
                                 </div>
                             </div>
 
+                            <div className="sm:col-span-2">
+                                <label
+                                    htmlFor="contact-hospital"
+                                    className="block text-xs font-medium text-text-muted mb-1.5"
+                                >
+                                    Hospital / clinic name
+                                </label>
+                                <div className="flex items-center gap-2.5 rounded-xl border border-border bg-bg px-3.5 py-2.5 focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20 transition-all duration-200">
+                                    <IconBuilding size={16} className="text-text-muted shrink-0" />
+                                    <input
+                                        id="contact-hospital"
+                                        name="hospital"
+                                        type="text"
+                                        value={form.hospital}
+                                        onChange={handleChange}
+                                        placeholder="Nova Health Multi-Speciality Hospital"
+                                        className="w-full bg-transparent text-sm text-text placeholder:text-text-muted/60 focus:outline-none"
+                                    />
+                                </div>
+                            </div>
+
                             <div>
                                 <label
                                     htmlFor="contact-email"
@@ -190,7 +214,7 @@ export default function ContactSection() {
                                     Email address
                                 </label>
                                 <div className="flex items-center gap-2.5 rounded-xl border border-border bg-bg px-3.5 py-2.5 focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20 transition-all duration-200">
-                                    <FiMail size={15} className="text-text-muted shrink-0" />
+                                    <IconMail size={16} className="text-text-muted shrink-0" />
                                     <input
                                         id="contact-email"
                                         name="email"
@@ -198,7 +222,7 @@ export default function ContactSection() {
                                         required
                                         value={form.email}
                                         onChange={handleChange}
-                                        placeholder="jane@company.com"
+                                        placeholder="jane@hospital.com"
                                         className="w-full bg-transparent text-sm text-text placeholder:text-text-muted/60 focus:outline-none"
                                     />
                                 </div>
@@ -212,7 +236,7 @@ export default function ContactSection() {
                                     Mobile number
                                 </label>
                                 <div className="flex items-center gap-2.5 rounded-xl border border-border bg-bg px-3.5 py-2.5 focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20 transition-all duration-200">
-                                    <FiSmartphone size={15} className="text-text-muted shrink-0" />
+                                    <IconSmartphone size={16} className="text-text-muted shrink-0" />
                                     <input
                                         id="contact-mobile"
                                         name="mobile"
@@ -232,10 +256,10 @@ export default function ContactSection() {
                                 htmlFor="contact-message"
                                 className="block text-xs font-medium text-text-muted mb-1.5"
                             >
-                                Message
+                                What are you looking to solve?
                             </label>
                             <div className="flex items-start gap-2.5 rounded-xl border border-border bg-bg px-3.5 py-3 focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20 transition-all duration-200">
-                                <FiMessageSquare size={15} className="text-text-muted shrink-0 mt-0.5" />
+                                <IconMessage size={16} className="text-text-muted shrink-0 mt-0.5" />
                                 <textarea
                                     id="contact-message"
                                     name="message"
@@ -243,7 +267,7 @@ export default function ContactSection() {
                                     required
                                     value={form.message}
                                     onChange={handleChange}
-                                    placeholder="Tell us a bit about what you need..."
+                                    placeholder="Tell us about your hospital size, current setup, and what you need..."
                                     className="w-full bg-transparent text-sm text-text placeholder:text-text-muted/60 focus:outline-none resize-none"
                                 />
                             </div>
@@ -253,8 +277,8 @@ export default function ContactSection() {
                             type="submit"
                             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-white bg-linear-to-r from-primary to-secondary shadow-[0_8px_20px_-8px_var(--color-primary)] hover:-translate-y-0.5 transition-transform duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary"
                         >
-                            Send message
-                            <FiSend size={15} />
+                            Talk to Sales
+                            <IconSend size={16} />
                         </button>
 
                         <p
@@ -262,7 +286,7 @@ export default function ContactSection() {
                                 }`}
                             role="status"
                         >
-                            Thanks — we'll be in touch shortly.
+                            Thanks — our sales team will reach out shortly.
                         </p>
                     </form>
                 </div>

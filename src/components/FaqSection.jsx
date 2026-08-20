@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FiChevronDown, FiMessageCircle, FiMail } from "react-icons/fi";
+import { IconChevronDown, IconChat, IconMail } from "./icons/MedicalIcons";
 
 /**
  * FAQ — IndHMS (hospital management software).
@@ -72,7 +72,7 @@ function AccordionItem({ item, isOpen, onToggle }) {
                         : "bg-bg border-border text-text-muted"
                         }`}
                 >
-                    <FiChevronDown size={16} />
+                    <IconChevronDown size={16} />
                 </span>
             </button>
 
@@ -151,10 +151,10 @@ export default function FAQSection() {
                     </div>
                     <div className="flex items-center gap-3 shrink-0">
                         <a
-                            href="mailto:hello@indhms.com"
+                            href="mailto:sales@indhms.com"
                             className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-text border border-border hover:border-primary/40 hover:text-primary transition-colors duration-200"
                         >
-                            <FiMail size={15} />
+                            <IconMail size={15} />
                             Email us
                         </a>
                         <a
@@ -163,7 +163,7 @@ export default function FAQSection() {
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-white bg-linear-to-r from-primary to-secondary shadow-[0_8px_20px_-8px_var(--color-primary)] hover:-translate-y-0.5 transition-transform duration-200"
                         >
-                            <FiMessageCircle size={15} />
+                            <IconChat size={15} />
                             WhatsApp
                         </a>
                     </div>

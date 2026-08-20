@@ -1,43 +1,42 @@
 import React from "react";
 import {
-  FiArrowUpRight,
-  FiUser,
-  FiRefreshCw,
-  FiBarChart2,
-} from "react-icons/fi";
-import benefit1 from "../images/Benefit1.png";
-import benefit2 from "../images/Benefit2.png";
+  IconArrowUpRight,
+  IconUsersMed,
+  IconChartPulse,
+  IconShieldCheck,
+  IconBuildings,
+  IconHeartPulse,
+} from "./icons/MedicalIcons";
+import { Link } from "react-router-dom";
 
 /**
  * Benefits — Bento layout
- * Deliberately different from the uniform 3/2-column card grid: one large
- * hero card, a stat callout (echoing the "97% satisfaction" figure from the
- * hero dashboard), two compact icon cards, and two wide horizontal cards.
- * Standard CSS grid auto-placement (row-major) lays the asymmetric pattern
- * out correctly as long as the cards are declared in this order.
+ * One large hero card, a stat callout (echoing the "97% satisfaction"
+ * figure from the hero dashboard), two compact icon cards, and two wide
+ * horizontal cards — all rewritten around real hospital-operations
+ * benefits instead of generic SaaS copy.
  */
 
 function HeroBenefitCard() {
   return (
     <div className="relative overflow-hidden rounded-2xl border border-border bg-surface p-6 sm:p-8 col-span-1 sm:col-span-2 lg:col-span-2 lg:row-span-2 flex flex-col justify-between min-h-[280px] lg:min-h-0 shadow-sm hover:shadow-lg hover:border-primary/40 transition-all duration-300">
-      <div className="relative z-10 max-w-[70%] sm:max-w-[65%]">
+      <div className="absolute -bottom-16 -right-16 w-64 h-64 rounded-full bg-linear-to-br from-primary/10 to-secondary/10 blur-2xl pointer-events-none" />
+      <div className="relative z-10 max-w-[78%] sm:max-w-[70%]">
         <span className="inline-block text-[11px] font-semibold tracking-wide uppercase text-primary bg-primary/10 rounded-full px-3 py-1 mb-4">
-          Flagship
+          Unified Records
         </span>
         <h3 className="text-text font-bold text-xl sm:text-2xl mb-3 leading-snug">
-          Innovative Essential Platforms
+          One Patient Record, Every Department
         </h3>
         <p className="text-sm sm:text-[15px] text-text-muted leading-relaxed">
-          A groundbreaking e-commerce platform that seamlessly connects
-          buyers and sellers worldwide — built to scale with your business,
-          not against it.
+          Registration, OPD/IPD, pharmacy, lab, and billing all read from the
+          same patient file — so staff stop re-entering data and doctors get
+          the full picture in one screen.
         </p>
       </div>
-      <img
-        src={benefit1}
-        alt=""
-        className="absolute bottom-0 right-0 w-40 sm:w-52 lg:w-56 select-none pointer-events-none"
-      />
+      <span className="absolute bottom-6 right-6 sm:bottom-8 sm:right-8 flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-linear-to-br from-primary to-secondary text-white shadow-[0_12px_28px_-10px_var(--color-primary)]">
+        <IconHeartPulse size={32} />
+      </span>
     </div>
   );
 }
@@ -47,10 +46,10 @@ function StatCard() {
     <div className="relative overflow-hidden rounded-2xl bg-linear-to-br from-primary to-secondary p-6 sm:p-8 col-span-1 sm:col-span-2 lg:col-span-2 flex flex-col justify-center min-h-[160px] lg:min-h-0 shadow-md">
       <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-white/10 blur-2xl pointer-events-none" />
       <p className="relative z-10 text-white font-extrabold text-4xl sm:text-5xl leading-none mb-2">
-        97%
+        40%
       </p>
-      <p className="relative z-10 text-white/85 text-sm sm:text-[15px] font-medium max-w-[220px]">
-        Client satisfaction across every platform we've shipped.
+      <p className="relative z-10 text-white/85 text-sm sm:text-[15px] font-medium max-w-[240px]">
+        Average reduction in patient billing & discharge time after switching to IndHMS.
       </p>
     </div>
   );
@@ -60,7 +59,7 @@ function IconCard({ icon: Icon, title, description }) {
   return (
     <div className="relative overflow-hidden rounded-2xl border border-border bg-surface p-5 sm:p-6 col-span-1 flex flex-col justify-center min-h-[160px] lg:min-h-0 shadow-sm hover:shadow-lg hover:border-primary/40 transition-all duration-300">
       <span className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 text-primary mb-3">
-        <Icon size={18} />
+        <Icon size={19} />
       </span>
       <h3 className="text-text font-bold text-[15px] sm:text-base mb-1.5">
         {title}
@@ -72,20 +71,12 @@ function IconCard({ icon: Icon, title, description }) {
   );
 }
 
-function WideCard({ icon: Icon, image, title, description }) {
+function WideCard({ icon: Icon, title, description }) {
   return (
     <div className="relative overflow-hidden rounded-2xl border border-border bg-surface p-5 sm:p-6 col-span-1 sm:col-span-2 lg:col-span-2 flex items-center gap-4 sm:gap-6 min-h-[140px] shadow-sm hover:shadow-lg hover:border-primary/40 transition-all duration-300">
-      {image ? (
-        <img
-          src={image}
-          alt=""
-          className="w-16 h-16 sm:w-20 sm:h-20 object-contain shrink-0 select-none pointer-events-none"
-        />
-      ) : (
-        <span className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-lg bg-primary/10 text-primary shrink-0">
-          <Icon size={20} />
-        </span>
-      )}
+      <span className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-lg bg-primary/10 text-primary shrink-0">
+        <Icon size={22} />
+      </span>
       <div className="min-w-0">
         <h3 className="text-text font-bold text-[15px] sm:text-base mb-1">
           {title}
@@ -121,11 +112,11 @@ function BenefitsBento() {
         {/* Heading */}
         <div className="flex flex-col items-center text-center max-w-xl mb-10 sm:mb-14">
           <h2 className="text-text font-bold text-3xl sm:text-4xl my-4 sm:my-6">
-            Your Benefits
+            Built for Real Hospital Operations
           </h2>
           <p className="text-text-muted px-2 text-sm sm:text-base leading-relaxed">
-            Harnessing the power of artificial intelligence to revolutionize
-            industries and enhance human experiences.
+            Fewer manual handoffs, cleaner records, and a system every
+            department — front desk to finance — actually wants to use.
           </p>
         </div>
 
@@ -137,31 +128,34 @@ function BenefitsBento() {
           <HeroBenefitCard />
           <StatCard />
           <IconCard
-            icon={FiUser}
-            title="Effortless Personalization"
-            description="Remembers preferences and recommends what each visitor actually wants."
+            icon={IconUsersMed}
+            title="Less Staff Workload"
+            description="Automated scheduling and record lookups free front-desk and nursing staff from repetitive paperwork."
           />
           <IconCard
-            icon={FiRefreshCw}
-            title="Continual Improvement"
-            description="Learns from every interaction to keep your platform relevant and optimized."
+            icon={IconShieldCheck}
+            title="Secure & Compliant"
+            description="Role-based access, full audit trails, and data handling aligned with India's ABDM standards."
           />
           <WideCard
-            icon={FiBarChart2}
-            title="Smart Data Insights"
-            description="Turns raw user behavior into clear, actionable insights — decisions backed by data, not guesswork."
+            icon={IconChartPulse}
+            title="Real-Time Hospital Insights"
+            description="Occupancy, revenue, and department performance in one dashboard — decisions backed by live data, not end-of-month reports."
           />
           <WideCard
-            image={benefit2}
-            title="Reliable Round-the-Clock Support"
-            description="AI-driven monitoring catches and resolves issues before your users ever notice."
+            icon={IconBuildings}
+            title="Manage Every Branch Centrally"
+            description="Run a single facility or a multi-branch network from one admin view, with each branch keeping its own workflow."
           />
         </div>
 
         {/* CTA */}
-        <button className="mt-10 text-primary font-semibold py-2.5 px-6 text-base sm:text-lg border border-primary rounded-3xl flex flex-row items-center gap-2 hover:bg-primary hover:text-white transition-all duration-300">
-          Explore More <FiArrowUpRight className="w-5 h-5 sm:w-6 sm:h-6" />
-        </button>
+        <Link
+          to="/benefits"
+          className="mt-10 text-primary font-semibold py-2.5 px-6 text-base sm:text-lg border border-primary rounded-3xl flex flex-row items-center gap-2 hover:bg-primary hover:text-white transition-all duration-300"
+        >
+          Explore More <IconArrowUpRight className="w-5 h-5 sm:w-6 sm:h-6" />
+        </Link>
 
       </div>
     </section>
