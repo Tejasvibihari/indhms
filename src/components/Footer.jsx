@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
     FiTwitter,
     FiLinkedin,
@@ -16,15 +17,15 @@ import {
 const LINK_COLUMNS = [
     {
         title: "Product",
-        links: ["Features", "Benefits", "Pricing", "Integrations"],
+        links: [["Features", "/features"], ["Benefits", "/benefits"], ["Pricing", "/pricing"], ["Integrations", "/integrations"]],
     },
     {
         title: "Company",
-        links: ["About", "Careers", "Blog", "Contact"],
+        links: [["About", "/about"], ["Careers", "/careers"], ["Blog", "/blog"], ["Contact", "/contact"]],
     },
     {
         title: "Resources",
-        links: ["Documentation", "Support", "FAQs", "Community"],
+        links: [["Documentation", "/documentation"], ["Support", "/support"], ["FAQs", "/faqs"], ["Community", "/community"]],
     },
 ];
 
@@ -35,7 +36,7 @@ const SOCIALS = [
     { icon: FiInstagram, label: "Instagram" },
 ];
 
-const LEGAL_LINKS = ["Privacy Policy", "Terms of Service", "Cookie Policy"];
+const LEGAL_LINKS = [["Privacy Policy", "/privacy-policy"], ["Terms of Service", "/terms-of-service"], ["Cookie Policy", "/cookie-policy"]];
 
 function FooterColumn({ title, links }) {
     return (
@@ -44,14 +45,14 @@ function FooterColumn({ title, links }) {
                 {title}
             </h3>
             <ul className="space-y-2.5">
-                {links.map((label) => (
+                {links.map(([label, to]) => (
                     <li key={label}>
-                        <a
-                            href="#"
+                        <Link
+                            to={to}
                             className="text-sm text-text-muted hover:text-primary transition-colors duration-200"
                         >
                             {label}
-                        </a>
+                        </Link>
                     </li>
                 ))}
             </ul>
@@ -108,14 +109,14 @@ export default function Footer() {
                         © {new Date().getFullYear()} Aurora. All rights reserved.
                     </p>
                     <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-                        {LEGAL_LINKS.map((label) => (
+                        {LEGAL_LINKS.map(([label, to]) => (
                             <li key={label}>
-                                <a
-                                    href="#"
+                                <Link
+                                    to={to}
                                     className="text-xs text-text-muted hover:text-primary transition-colors duration-200"
                                 >
                                     {label}
-                                </a>
+                                </Link>
                             </li>
                         ))}
                     </ul>

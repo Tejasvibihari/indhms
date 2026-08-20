@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FiZap, FiMenu, FiX } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 /**
  * Site navbar — sticky, light theme, built on the shared design tokens.
@@ -7,7 +8,13 @@ import { FiZap, FiMenu, FiX } from "react-icons/fi";
  * on the right. Collapses into a slide-down menu on mobile.
  */
 
-const NAV_LINKS = ["Features", "Benefits", "Pricing", "Resources", "Contact"];
+const NAV_LINKS = [
+    { label: "Features", to: "/features" },
+    { label: "Benefits", to: "/benefits" },
+    { label: "Pricing", to: "/pricing" },
+    { label: "Resources", to: "/resources" },
+    { label: "Contact", to: "/contact" },
+];
 
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
@@ -38,37 +45,37 @@ export default function Navbar() {
             <nav className="max-w-6xl mx-auto flex items-center justify-between px-4 sm:px-6 h-16 sm:h-18">
 
                 {/* Logo */}
-                <a href="#" className="flex items-center gap-2.5 shrink-0">
+                <Link to="/" className="flex items-center gap-2.5 shrink-0">
                     <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-linear-to-br from-primary to-secondary text-white shadow-[0_6px_16px_-6px_var(--color-primary)]">
                         <FiZap size={16} />
                     </span>
                     <span className="text-text font-bold text-lg tracking-tight">
                         Aurora
                     </span>
-                </a>
+                </Link>
 
                 {/* Desktop nav links */}
                 <ul className="hidden lg:flex items-center gap-8">
-                    {NAV_LINKS.map((label) => (
+                    {NAV_LINKS.map(({ label, to }) => (
                         <li key={label}>
-                            <a
-                                href="#"
+                            <Link
+                                to={to}
                                 className="text-sm font-medium text-text-muted hover:text-primary transition-colors duration-200"
                             >
                                 {label}
-                            </a>
+                            </Link>
                         </li>
                     ))}
                 </ul>
 
                 {/* Right side: CTA (desktop) + hamburger (mobile) */}
                 <div className="flex items-center gap-3">
-                    <button
-                        type="button"
+                    <Link
+                        to="/contact"
                         className="hidden sm:inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-white bg-linear-to-r from-primary to-secondary shadow-[0_8px_20px_-8px_var(--color-primary)] hover:-translate-y-0.5 transition-transform duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary"
                     >
                         Get Started
-                    </button>
+                    </Link>
 
                     <button
                         type="button"
@@ -88,24 +95,25 @@ export default function Navbar() {
                     }`}
             >
                 <ul className="flex flex-col px-4 sm:px-6 py-4 gap-1">
-                    {NAV_LINKS.map((label) => (
+                    {NAV_LINKS.map(({ label, to }) => (
                         <li key={label}>
-                            <a
-                                href="#"
+                            <Link
+                                to={to}
                                 onClick={() => setMobileOpen(false)}
                                 className="block py-2.5 text-[15px] font-medium text-text-muted hover:text-primary transition-colors duration-200"
                             >
                                 {label}
-                            </a>
+                            </Link>
                         </li>
                     ))}
                     <li className="pt-3">
-                        <button
-                            type="button"
+                        <Link
+                            to="/contact"
+                            onClick={() => setMobileOpen(false)}
                             className="w-full inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-white bg-linear-to-r from-primary to-secondary shadow-[0_8px_20px_-8px_var(--color-primary)] transition-transform duration-200 active:scale-[0.98]"
                         >
                             Get Started
-                        </button>
+                        </Link>
                     </li>
                 </ul>
             </div>
