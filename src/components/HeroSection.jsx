@@ -265,17 +265,19 @@ function HeroCTA() {
                     type="button"
                     className="cta-primary group inline-flex items-center gap-2 rounded-xl px-6 py-3.5 text-[15px] font-semibold text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
                 >
-                    Start a Project
+                    Book A Free Demo
                     <span aria-hidden="true" className="cta-arrow transition-transform duration-300 group-hover:translate-x-1">
                         →
                     </span>
                 </button>
-                <button
+
+                {/* <button
                     type="button"
                     className="cta-secondary inline-flex items-center gap-2 rounded-xl px-6 py-3.5 text-[15px] font-semibold text-slate-700 bg-white border border-slate-200 hover:bg-slate-50 hover:border-slate-300 transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
                 >
                     Explore Solutions
-                </button>
+                </button> */}
+
             </div>
         </div>
     );
@@ -319,7 +321,7 @@ export default function HeroSection() {
                 <div className="badge inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 mb-5">
                     <span className="badge-dot" aria-hidden="true" />
                     <span className="text-[11px] font-semibold tracking-[0.14em] text-slate-600 uppercase">
-                        AI-Powered Digital Solutions
+                        Modern Hospital Management Platform
                     </span>
                 </div>
 
@@ -329,15 +331,14 @@ export default function HeroSection() {
                     className="font-extrabold tracking-tight text-slate-900 leading-[1.1]"
                     style={{ fontSize: "clamp(1.9rem, 3.6vw, 3.25rem)" }}
                 >
-                    Transform Your Business
+                    Manage Your Hospital Smarter, Faster & Better
                     <br />
-                    <span className="hero-gradient-text">with AI-Powered Solutions</span>
+                    {/* <span className="hero-gradient-text">with AI-Powered Solutions</span> */}
                 </h1>
 
                 {/* supporting copy */}
                 <p className="mt-4 text-slate-500 text-[15px] sm:text-[16px] leading-relaxed max-w-[560px]">
-                    We build intelligent digital products, automate complex workflows, and
-                    help businesses scale with modern AI-powered technology.
+                    One powerful platform to manage patients, doctors, appointments, billing, pharmacy, laboratory, admissions, and hospital operations.
                 </p>
 
                 {/* CTAs */}
