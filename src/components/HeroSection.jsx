@@ -77,9 +77,9 @@ function EnergyWaves() {
                     <stop offset="100%" stopColor="#2563EB" stopOpacity="0" />
                 </linearGradient>
                 <linearGradient id="g-violet" x1="0" y1="0" x2="1" y2="0">
-                    <stop offset="0%" stopColor="#7C3AED" stopOpacity="0" />
-                    <stop offset="50%" stopColor="#A78BFA" stopOpacity="1" />
-                    <stop offset="100%" stopColor="#7C3AED" stopOpacity="0" />
+                    <stop offset="0%" stopColor="#4F46E5" stopOpacity="0" />
+                    <stop offset="50%" stopColor="#818CF8" stopOpacity="1" />
+                    <stop offset="100%" stopColor="#4F46E5" stopOpacity="0" />
                 </linearGradient>
                 <linearGradient id="g-cyan" x1="0" y1="0" x2="1" y2="0">
                     <stop offset="0%" stopColor="#06B6D4" stopOpacity="0" />
@@ -254,19 +254,10 @@ function DashboardPreview() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  CTA + lead capture                                                 */
+/*  CTA buttons                                                        */
 /* ------------------------------------------------------------------ */
 
 function HeroCTA() {
-    const [email, setEmail] = useState("");
-    const [submitted, setSubmitted] = useState(false);
-
-    function handleSubmit(e) {
-        e.preventDefault();
-        if (!email) return;
-        setSubmitted(true);
-    }
-
     return (
         <div className="w-full flex flex-col items-center gap-6">
             <div className="flex flex-col sm:flex-row items-center gap-3">
@@ -286,43 +277,6 @@ function HeroCTA() {
                     Explore Solutions
                 </button>
             </div>
-
-            <form
-                onSubmit={handleSubmit}
-                className="w-full max-w-md"
-                aria-label="Get an AI strategy for your business"
-            >
-                <p className="text-center text-[12px] font-medium text-slate-500 mb-2.5 tracking-wide">
-                    Get an AI strategy for your business
-                </p>
-                <div className="flex flex-col sm:flex-row gap-2 rounded-2xl bg-white/80 backdrop-blur-sm border border-slate-200 p-1.5 shadow-sm">
-                    <label htmlFor="hero-email" className="sr-only">
-                        Your email address
-                    </label>
-                    <input
-                        id="hero-email"
-                        type="email"
-                        required
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="Your email address"
-                        className="flex-1 bg-transparent px-4 py-2.5 text-[14px] text-slate-800 placeholder:text-slate-400 focus:outline-none rounded-xl"
-                    />
-                    <button
-                        type="submit"
-                        className="cta-primary shrink-0 rounded-xl px-5 py-2.5 text-[14px] font-semibold text-white whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
-                    >
-                        Let&rsquo;s Talk →
-                    </button>
-                </div>
-                <p
-                    className={`text-center text-[12px] mt-2 transition-opacity duration-300 ${submitted ? "opacity-100 text-emerald-600" : "opacity-0"
-                        }`}
-                    role="status"
-                >
-                    Thanks — we&rsquo;ll be in touch shortly.
-                </p>
-            </form>
         </div>
     );
 }
@@ -356,13 +310,13 @@ export default function HeroSection() {
             <div className="hero-grid" aria-hidden="true" />
 
             {/* animated energy wires, sit behind the dashboard */}
-            <div className="absolute inset-x-0 top-[22%] sm:top-[18%] h-[560px] pointer-events-none">
+            <div className="absolute inset-x-0 top-[18%] sm:top-[14%] h-[560px] pointer-events-none">
                 <EnergyWaves />
             </div>
 
-            <div className="relative z-10 max-w-6xl mx-auto px-6 pt-28 pb-20 sm:pt-36 flex flex-col items-center text-center">
+            <div className="relative z-10 max-w-6xl mx-auto px-6 pt-16 pb-16 sm:pt-20 flex flex-col items-center text-center">
                 {/* eyebrow badge */}
-                <div className="badge inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 mb-7">
+                <div className="badge inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 mb-5">
                     <span className="badge-dot" aria-hidden="true" />
                     <span className="text-[11px] font-semibold tracking-[0.14em] text-slate-600 uppercase">
                         AI-Powered Digital Solutions
@@ -372,8 +326,8 @@ export default function HeroSection() {
                 {/* heading */}
                 <h1
                     id="hero-heading"
-                    className="font-extrabold tracking-tight text-slate-900 leading-[1.05]"
-                    style={{ fontSize: "clamp(2.75rem, 6vw, 6.5rem)" }}
+                    className="font-extrabold tracking-tight text-slate-900 leading-[1.1]"
+                    style={{ fontSize: "clamp(1.9rem, 3.6vw, 3.25rem)" }}
                 >
                     Transform Your Business
                     <br />
@@ -381,30 +335,30 @@ export default function HeroSection() {
                 </h1>
 
                 {/* supporting copy */}
-                <p className="mt-6 text-slate-500 text-[17px] sm:text-[19px] leading-relaxed max-w-[640px]">
+                <p className="mt-4 text-slate-500 text-[15px] sm:text-[16px] leading-relaxed max-w-[560px]">
                     We build intelligent digital products, automate complex workflows, and
                     help businesses scale with modern AI-powered technology.
                 </p>
 
-                {/* CTAs + lead capture */}
-                <div className="mt-9 w-full">
+                {/* CTAs */}
+                <div className="mt-7 w-full">
                     <HeroCTA />
                 </div>
 
                 {/* dashboard preview */}
-                <div className="mt-16 sm:mt-20 w-full flex justify-center">
+                <div className="mt-10 sm:mt-12 w-full flex justify-center">
                     <DashboardPreview />
                 </div>
             </div>
 
             <style>{`
         .hero-root {
-          background: #F8FAFF;
+          background: var(--color-bg, #F8FAFF);
         }
         .hero-bg {
           background:
             radial-gradient(60% 45% at 18% 8%, rgba(37,99,235,0.07), transparent 60%),
-            radial-gradient(55% 40% at 85% 12%, rgba(124,58,237,0.06), transparent 60%),
+            radial-gradient(55% 40% at 85% 12%, rgba(79,70,229,0.06), transparent 60%),
             linear-gradient(180deg, #FFFFFF 0%, #F8FAFF 40%, #EEF4FF 100%);
         }
         .hero-grid {
@@ -433,7 +387,7 @@ export default function HeroSection() {
         .glow-violet {
           width: 420px; height: 420px;
           top: 40px; right: -140px;
-          background: #7C3AED;
+          background: #4F46E5;
           opacity: 0.09;
         }
         .glow-cyan {
@@ -464,7 +418,7 @@ export default function HeroSection() {
 
         /* heading gradient */
         .hero-gradient-text {
-          background: linear-gradient(90deg, #2563EB 0%, #4F46E5 45%, #7C3AED 100%);
+          background: linear-gradient(90deg, #2563EB 0%, #4F46E5 100%);
           -webkit-background-clip: text;
           background-clip: text;
           color: transparent;
